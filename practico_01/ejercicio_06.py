@@ -8,10 +8,13 @@ def numeros_al_final_basico(lista: List[Union[float, str]]) -> List[Union[float,
     elementos numéricos al final.
     """
     numeros = []
-    for a in lista:
-        if type(a) is int or type(a) is float:
-            numeros.append(a)
-    return numeros
+    letras = []
+    for i in lista:
+        if type(i) is int or type(i) is float:
+            numeros.append(i)
+        if type(i) is str:
+            letras.append(i)
+    return (letras + numeros)
     pass # Completar
 
 
@@ -25,8 +28,10 @@ assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 
 
 def numeros_al_final_comprension(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """Re-escribir utilizando comprensión de listas."""
+    letras = [l for l in lista if isinstance(l, str)]
+    numeros = [l for l in lista if not isinstance(l, str)]
+    return letras + numeros
     pass # Completar
-
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_comprension([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -40,6 +45,12 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     """Re-escribir utilizando la función sorted con una custom key.
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
+    def tipo(e):
+        if type(e) is float or type(e) is int:
+            return 1
+        else: 
+            return 0    
+    return sorted(lista, key=tipo)
     pass # Completar
 
 
@@ -55,6 +66,11 @@ def numeros_al_final_filter(lista: List[Union[float, str]]) -> List[Union[float,
     """CHALLENGE OPCIONAL - Re-escribir utilizando la función filter.
     Referencia: https://docs.python.org/3/library/functions.html#filter
     """
+    letras = []
+    numeros = []
+    letras = list(filter(lambda x: isinstance(x, str), lista))
+    numeros = list(filter(lambda x: isinstance(x, (int, float)), lista))
+    return letras + numeros
     pass # Completar
 
 
@@ -69,6 +85,7 @@ if __name__ == "__main__":
 
 def numeros_al_final_recursivo(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """CHALLENGE OPCIONAL - Re-escribir de forma recursiva."""
+    
     pass # Completar
 
 
