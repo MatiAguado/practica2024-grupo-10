@@ -21,6 +21,29 @@ def generar_pares_clousure(initial: int = 0) -> Callable[[], int]:
         - Usar closures
         - Usar el modificador nonlocal
     """
+
+    # Esta variable guardara el ultimo nro iterado
+    ultimo = initial
+    def generar_pares():
+        # nonlocal para manipular la variable externa a generar_pares
+        nonlocal ultimo
+        # Para la primera invocacion, devolvemos initial si es par
+        # Pero tambien aumentamos el valor de ultimo para la prox iteracion
+        if ultimo==initial and initial % 2 == 0:
+            ultimo +=2
+            return initial
+        # Si es la primer invocacion, e initial no es par, devolvemos el siguiente par
+        elif ultimo == initial:
+            ultimo +=1
+            return ultimo
+        # En las iteraciones que siguen, ya habran numeros pares, asi que 
+        # siempre sumaremos 2 respecto al ultimo
+        else:
+            ant = ultimo
+            ultimo+=2
+            return ant
+
+    return generar_pares
     pass # Completar
 
 
@@ -45,7 +68,17 @@ def generar_pares_generator(initial: int = 0) -> Iterator[int]:
     """Re-Escribir utilizando Generadores
     Referencia: https://docs.python.org/3/howto/functional.html?highlight=generator#generators
     """
+     # Seteamos la primer variable
+    i = initial if initial % 2 == 0 else initial + 1
+
+    # Y esto es lo que se ejecutara siempre. yield funciona como el return, pero guardande el valor de i para la prox iteracion
+    # Se puede aumentar el valor de i despues del yield
+    while True:
+        yield i 
+        i+=2
     pass # Completar
+
+    
 
 
 # NO MODIFICAR - INICIO
@@ -61,6 +94,22 @@ assert next(generador_pares) == 4
 
 def generar_pares_generator_send(initial: int = 0) -> Iterator[int]:
     """CHALLENGE OPCIONAL: Re-Escribir utilizando send para saltear numeros"""
+    # Seteamos la primer variable, igual que antes
+    i = initial if initial % 2 == 0 else initial + 1
+
+    # Y esto es lo que se ejecutara siempre. yield funciona como el return, pero guardande el valor de i para la prox iteracion
+    # Se puede aumentar el valor de i despues del yield
+    while True:
+        # valor_enviado es el valor que habria si se usa .send(value)
+        valor_enviado = (yield i)
+
+        # Si hay valor enviado, lo devolvemos si es par, sino devolvemos el siguiente
+        if valor_enviado is not None:
+            i = valor_enviado if valor_enviado % 2 == 0 else valor_enviado + 1
+        # Si no hay valor enviado, devolvemos el siguiente par
+        else:
+            i+=2
+
     pass # Completar
 
 
