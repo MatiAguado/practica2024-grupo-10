@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
 
 def generar_pares_delegados(initial: int = 0) -> Iterator[int]:
-    """CHALLENGE OPCIONAL: Re-Escribir utilizando Generadores delegados (yield from)"""
+    """CHALLENGE OPCIONAL: Re-Escribir utilizando Generadores delegados (yield from)"""    
     pass # Completar
 
 

@@ -55,6 +55,8 @@ def suma_cubo_pares_sum_gen(numeros: Iterable[int]) -> int:
     Referencia: https://docs.python.org/3/reference/expressions.html#generator-expressions
     """
     
+    # El range no incluye el último numero, asi que va len(numeros) + 1
+    return sum(n**3 for n in range(len(numeros)+1) if n**3 % 2 == 0)
     pass # Completar
 
 

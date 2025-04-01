@@ -55,6 +55,15 @@ def medir_tiempo(func: Callable[[], int]) -> Tuple[int, float]:
     Restricción: La función no debe tomar parámetros y por lo tanto se
     recomienda usar partial.
     """
+
+    # perf_counter() devuelve el tiempo actual con gran precision
+    # entonces, lo usamos para medir el tiempo que toman ciertas operaciones en ejecutarse
+    inicio = perf_counter()
+    resultado = func()
+    tiempo_tomado = perf_counter() - inicio
+
+    return (resultado,tiempo_tomado)
+
     pass # Completar
 
 
@@ -73,6 +82,16 @@ def medir_tiempo(func: Callable[[Sequence[int], int], int]) -> Callable[[Sequenc
     partial. En este caso se debe devolver una función que devuelva la tupla y
     tome una cantidad arbitraria de parámetros.
     """
+    # Definimos lo mismo que antes, pero en una funcion interna
+    # La devolvemos en forma de clousure
+    # De esta forma, podemos pasar los parametros directamente a la funcion clousure
+    # sin usar partial
+    def func_interna(lista: Sequence[int],limite: int):
+        inicio = perf_counter()
+        resultado = func(lista,limite)
+        tiempo_tomado = perf_counter() - inicio
+        return resultado, tiempo_tomado
+    return func_interna
     pass # Completar
 
 
