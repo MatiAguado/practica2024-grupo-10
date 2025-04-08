@@ -10,8 +10,22 @@ class Articulo:
           clase (@classmethod) con una variable de clase
     """
 
-    # Completar
+    # Declaramos la variable de clase
+    _last_id = 0
 
+    # Admitimos clases sin nombre, poniendo None como default
+    def __init__(self, nombre: str = None):
+        self.nombre = nombre
+        # Asignamos el id de la instancia mediante el metodo de clase
+        self.id_ = self._increment_last_id()
+
+    # Decorador para metodos de clase
+    @classmethod
+    # Al igual que al self, tenemos que poner cls para referenciar variables de clase
+    # En este metodo, incrementamos y devolvemos el id
+    def _increment_last_id(cls):
+        cls._last_id += 1
+        return cls._last_id
 
 # NO MODIFICAR - INICIO
 art1 = Articulo("manzana")
