@@ -8,7 +8,19 @@ class Rectangulo:
     Implementar la clase Rectangulo que contiene una base y una altura, y el
     método area.
     """
-    # Completar
+    # Para el Test de valores por defecto, les ponemos por defecto None
+    def __init__(self, base:float = None, altura:float = None):
+        self.base = base
+        self.altura = altura
+        
+    
+    # Para cumplir el Test de valores por defecto se hace este if
+    def area(self) -> float:
+        if self.base is None or self.altura is None:
+            return 0
+        else:
+            return self.base * self.altura
+
 
 
 # NO MODIFICAR - INICIO
